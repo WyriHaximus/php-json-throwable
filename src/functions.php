@@ -13,7 +13,7 @@ function throwable_json_encode($throwable)
 
 function throwable_encode($throwable)
 {
-    if (!($throwable instanceof Exception) || !($throwable instanceof Throwable)) {
+    if (!($throwable instanceof Exception) && !($throwable instanceof Throwable)) {
         throw new NotAThrowableException($throwable);
     }
 
