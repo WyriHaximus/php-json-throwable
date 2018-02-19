@@ -4,6 +4,7 @@ namespace WyriHaximus\Tests;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
+use WyriHaximus;
 
 final class ThrowableEncodeTest extends TestCase
 {
@@ -23,7 +24,7 @@ final class ThrowableEncodeTest extends TestCase
             $json['trace'][] = $item;
         }
 
-        $exception = \WyriHaximus\throwable_encode($exception);
+        $exception = WyriHaximus\throwable_encode($exception);
         self::assertSame($json, $exception);
     }
 }
