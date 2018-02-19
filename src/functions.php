@@ -57,7 +57,7 @@ function throwable_decode($json)
 
     array_pop($properties);
 
-    $throwable = (new ReflectionClass($json['class']))->newInstanceWithoutConstructor();
+    $throwable = new $json['class'];
     foreach ($properties as $key) {
         $property = new ReflectionProperty($json['class'], $key);
         $property->setAccessible(true);
