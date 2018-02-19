@@ -2,6 +2,7 @@
 
 namespace WyriHaximus\Tests;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 use function WyriHaximus\throwable_decode;
 
@@ -15,10 +16,10 @@ final class ThrowableDecodeTest extends TestCase
             'file' => __FILE__,
             'line' => 0,
             'trace' => [],
-            'class' => '\Exception',
+            'class' => 'Exception',
         ];
 
-        /** @var \Exception $exception */
+        /** @var Exception $exception */
         $exception = throwable_decode($json);
         self::assertSame(13, $exception->getCode());
         self::assertSame(__FILE__, $exception->getFile());
