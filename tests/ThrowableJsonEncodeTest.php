@@ -3,7 +3,6 @@
 namespace WyriHaximus\Tests;
 
 use PHPUnit\Framework\TestCase;
-use function WyriHaximus\throwable_json_encode;
 
 final class ThrowableJsonEncodeTest extends TestCase
 {
@@ -24,7 +23,7 @@ final class ThrowableJsonEncodeTest extends TestCase
         }
         $json = json_encode($json);
 
-        $exception = throwable_json_encode($exception);
+        $exception = \WyriHaximus\throwable_json_encode($exception);
         self::assertSame($json, $exception);
     }
 }
