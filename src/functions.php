@@ -3,7 +3,6 @@
 namespace WyriHaximus;
 
 use Exception;
-use ReflectionClass;
 use ReflectionProperty;
 use Throwable;
 
