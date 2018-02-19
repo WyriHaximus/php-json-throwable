@@ -2,13 +2,14 @@
 
 namespace WyriHaximus\Tests;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 final class ThrowableJsonEncodeTest extends TestCase
 {
     public function test()
     {
-        $exception = new \Exception('whoops');
+        $exception = new Exception('whoops');
         $json = [
             'class' => get_class($exception),
             'message' => $exception->getMessage(),
