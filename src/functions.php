@@ -3,6 +3,7 @@
 namespace WyriHaximus;
 
 use Exception;
+use ReflectionClass;
 use ReflectionProperty;
 use Throwable;
 
@@ -58,6 +59,10 @@ function throwable_decode($json)
 
     $throwable = new $json['class']();
     foreach ($properties as $key) {
+        if (!(new ReflectionClass($json['class']))->hasProperty($key)) {
+            continue;
+        }
+
         $property = new ReflectionProperty($json['class'], $key);
         $property->setAccessible(true);
         $property->setValue($throwable, $json[$key]);
