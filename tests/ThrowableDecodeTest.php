@@ -27,4 +27,21 @@ final class ThrowableDecodeTest extends TestCase
         self::assertSame([], $exception->getTrace());
         self::assertSame('whoops', $exception->getMessage());
     }
+
+    public function testWithMissingAttributes()
+    {
+        $json = [
+            'message' => 'whoops',
+            'code' => 13,
+            'file' => __FILE__,
+            'line' => 0,
+            'trace' => [],
+            'class' => 'WyriHaximus\Tests\MissingAttributes',
+        ];
+
+        /** @var MissingAttributes $exception */
+        $exception = WyriHaximus\throwable_decode($json);
+        self::assertSame('whoops', $exception->message);
+        self::assertFalse(isset($exception->code));
+    }
 }

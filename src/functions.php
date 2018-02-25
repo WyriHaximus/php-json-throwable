@@ -57,9 +57,10 @@ function throwable_decode($json)
 
     array_pop($properties);
 
+    $class = new ReflectionClass($json['class']);
     $throwable = new $json['class']();
     foreach ($properties as $key) {
-        if (!(new ReflectionClass($json['class']))->hasProperty($key)) {
+        if (!$class->hasProperty($key)) {
             continue;
         }
 
