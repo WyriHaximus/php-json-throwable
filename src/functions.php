@@ -57,8 +57,13 @@ function throwable_decode($json)
 
     array_pop($properties);
 
+    if (PHP_MAJOR_VERSION === 7) {
+        $throwable = (new ReflectionClass($json['class']))->newInstanceWithoutConstructor();
+    }
     $class = new ReflectionClass($json['class']);
-    $throwable = new $json['class']();
+    if (!isset($throwable)) {
+        $throwable = new $json['class']();
+    }
     foreach ($properties as $key) {
         if (!$class->hasProperty($key)) {
             continue;
