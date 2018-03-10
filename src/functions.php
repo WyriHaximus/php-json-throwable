@@ -58,11 +58,22 @@ function throwable_decode($json)
     array_pop($properties);
 
     if (PHP_MAJOR_VERSION === 7) {
-        $throwable = (new ReflectionClass($json['class']))->newInstanceWithoutConstructor();
+        try {
+            $throwable = (new ReflectionClass($json['class']))->newInstanceWithoutConstructor();
+        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+        }
     }
     $class = new ReflectionClass($json['class']);
     if (!isset($throwable)) {
-        $throwable = new $json['class']();
+        try {
+            $throwable = new $json['class']();
+        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+        }
+    }
+    if (!isset($throwable)) {
+        $throwable = unserialize('O:' . strlen($json['class']) . ':"' . $json['class'] . '":0:{}"', [$json['class']]);
     }
     foreach ($properties as $key) {
         if (!$class->hasProperty($key)) {
