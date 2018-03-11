@@ -73,7 +73,7 @@ function throwable_decode($json)
         }
     }
     if (!isset($throwable)) {
-        $throwable = unserialize('O:' . strlen($json['class']) . ':"' . $json['class'] . '":0:{}"', [$json['class']]);
+        $throwable = unserialize('O:' . strlen($json['class']) . ':"' . $json['class'] . '":0:{}"');
     }
     foreach ($properties as $key) {
         if (!$class->hasProperty($key)) {
