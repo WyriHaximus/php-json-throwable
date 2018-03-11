@@ -2,6 +2,7 @@
 
 namespace WyriHaximus;
 
+use Doctrine\Instantiator\Instantiator;
 use Exception;
 use ReflectionClass;
 use ReflectionProperty;
@@ -57,24 +58,8 @@ function throwable_decode($json)
 
     array_pop($properties);
 
-    if (PHP_MAJOR_VERSION === 7) {
-        try {
-            $throwable = (new ReflectionClass($json['class']))->newInstanceWithoutConstructor();
-        } catch (\Exception $e) {
-        } catch (\Throwable $e) {
-        }
-    }
+    $throwable = (new Instantiator())->instantiate($json['class']);
     $class = new ReflectionClass($json['class']);
-    if (!isset($throwable)) {
-        try {
-            $throwable = new $json['class']();
-        } catch (\Exception $e) {
-        } catch (\Throwable $e) {
-        }
-    }
-    if (!isset($throwable)) {
-        $throwable = unserialize('O:' . strlen($json['class']) . ':"' . $json['class'] . '":0:{}"');
-    }
     foreach ($properties as $key) {
         if (!$class->hasProperty($key)) {
             continue;
