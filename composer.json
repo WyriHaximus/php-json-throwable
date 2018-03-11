@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^7.0 || ^5.4",
-        "doctrine/instantiator": "^1.0"
+        "doctrine/instantiator": "^1.0.5"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.2",
