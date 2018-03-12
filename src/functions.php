@@ -25,6 +25,7 @@ function throwable_encode($throwable)
     $json['code'] = $throwable->getCode();
     $json['file'] = $throwable->getFile();
     $json['line'] = $throwable->getLine();
+    $json['previous'] = $throwable->getPrevious();
     $json['trace'] = [];
     foreach ($throwable->getTrace() as $item) {
         $item['args'] = [];
@@ -46,12 +47,13 @@ function throwable_decode($json)
         'code',
         'file',
         'line',
+        'previous',
         'trace',
         'class',
     ];
 
     foreach ($properties as $property) {
-        if (!isset($json[$property])) {
+        if (!isset($json[$property]) && !array_key_exists($property, $json)) {
             throw new NotAnEncodedThrowableException($json);
         }
     }

@@ -16,6 +16,7 @@ final class ThrowableJsonDecodeTest extends TestCase
             'file' => __FILE__,
             'line' => 0,
             'trace' => [],
+            'previous' => null,
             'class' => 'Exception',
         ]);
 
@@ -24,6 +25,7 @@ final class ThrowableJsonDecodeTest extends TestCase
         self::assertSame(13, $exception->getCode());
         self::assertSame(__FILE__, $exception->getFile());
         self::assertSame(0, $exception->getLine());
+        self::assertSame(null, $exception->getPrevious());
         self::assertSame([], $exception->getTrace());
         self::assertSame('whoops', $exception->getMessage());
     }

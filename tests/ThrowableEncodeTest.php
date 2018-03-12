@@ -17,6 +17,7 @@ final class ThrowableEncodeTest extends TestCase
             'code' => $exception->getCode(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
+            'previous' => $exception->getPrevious(),
         ];
         $json['trace'] = [];
         foreach ($exception->getTrace() as $item) {

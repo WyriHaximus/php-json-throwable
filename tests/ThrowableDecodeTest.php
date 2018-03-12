@@ -16,6 +16,7 @@ final class ThrowableDecodeTest extends TestCase
             'file' => __FILE__,
             'line' => 0,
             'trace' => [],
+            'previous' => null,
             'class' => 'Exception',
         ];
 
@@ -36,6 +37,7 @@ final class ThrowableDecodeTest extends TestCase
             'file' => __FILE__,
             'line' => 0,
             'trace' => [],
+            'previous' => null,
             'class' => 'WyriHaximus\Tests\MissingAttributes',
         ];
 
@@ -53,6 +55,7 @@ final class ThrowableDecodeTest extends TestCase
             'file' => __FILE__,
             'line' => 0,
             'trace' => [],
+            'previous' => null,
             'class' => 'WyriHaximus\Tests\RequiredConstructorArgumentsException',
         ];
 
@@ -70,6 +73,7 @@ final class ThrowableDecodeTest extends TestCase
             'file' => __FILE__,
             'line' => 0,
             'trace' => [],
+            'previous' => null,
             'class' => 'WyriHaximus\Tests\FinalException',
         ];
 
@@ -87,6 +91,7 @@ final class ThrowableDecodeTest extends TestCase
             'file' => __FILE__,
             'line' => 0,
             'trace' => [],
+            'previous' => null,
             'class' => 'WyriHaximus\Tests\FinalRequiredConstructorArgumentsException',
         ];
 
