@@ -8,12 +8,18 @@ use ReflectionClass;
 use ReflectionProperty;
 use Throwable;
 
-function throwable_json_encode($throwable)
+/**
+ * @throws NotAThrowableException
+ */
+function throwable_json_encode(Throwable $throwable): string
 {
     return json_encode(throwable_encode($throwable));
 }
 
-function throwable_encode($throwable)
+/**
+ * @throws NotAThrowableException
+ */
+function throwable_encode(Throwable $throwable): array
 {
     if (!($throwable instanceof Exception) && !($throwable instanceof Throwable)) {
         throw new NotAThrowableException($throwable);
@@ -35,12 +41,12 @@ function throwable_encode($throwable)
     return $json;
 }
 
-function throwable_json_decode($json)
+function throwable_json_decode(string $json): Throwable
 {
     return throwable_decode(json_decode($json, true));
 }
 
-function throwable_decode($json)
+function throwable_decode(array $json): Throwable
 {
     $properties = [
         'message',
@@ -52,11 +58,7 @@ function throwable_decode($json)
         'class',
     ];
 
-    foreach ($properties as $property) {
-        if (!isset($json[$property]) && !array_key_exists($property, $json)) {
-            throw new NotAnEncodedThrowableException($json);
-        }
-    }
+    validate_array($json, $properties, NotAnEncodedThrowableException::class);
 
     array_pop($properties);
 

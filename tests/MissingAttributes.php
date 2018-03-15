@@ -2,7 +2,9 @@
 
 namespace WyriHaximus\Tests;
 
-final class MissingAttributes
+use Exception;
+
+final class MissingAttributes extends Exception
 {
     public $message;
 }
