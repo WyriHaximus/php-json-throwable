@@ -17,7 +17,7 @@ final class ThrowableDecodeTest extends TestCase
             'line' => 0,
             'trace' => [],
             'previous' => null,
-            'class' => 'Exception',
+            'class' => Exception::class,
         ];
 
         /** @var Exception $exception */
@@ -38,13 +38,12 @@ final class ThrowableDecodeTest extends TestCase
             'line' => 0,
             'trace' => [],
             'previous' => null,
-            'class' => 'WyriHaximus\Tests\MissingAttributes',
+            'class' => MissingAttributes::class,
         ];
 
         /** @var MissingAttributes $exception */
         $exception = WyriHaximus\throwable_decode($json);
         self::assertSame('whoops', $exception->message);
-        self::assertFalse(isset($exception->code));
     }
 
     public function testRequiredConstructorArguments()
@@ -56,12 +55,12 @@ final class ThrowableDecodeTest extends TestCase
             'line' => 0,
             'trace' => [],
             'previous' => null,
-            'class' => 'WyriHaximus\Tests\RequiredConstructorArgumentsException',
+            'class' => RequiredConstructorArgumentsException::class,
         ];
 
         /** @var RequiredConstructorArgumentsException $exception */
         $exception = WyriHaximus\throwable_decode($json);
-        self::assertInstanceOf('WyriHaximus\Tests\RequiredConstructorArgumentsException', $exception);
+        self::assertInstanceOf(RequiredConstructorArgumentsException::class, $exception);
         self::assertSame('whoops', $exception->getMessage());
     }
 
@@ -74,12 +73,12 @@ final class ThrowableDecodeTest extends TestCase
             'line' => 0,
             'trace' => [],
             'previous' => null,
-            'class' => 'WyriHaximus\Tests\FinalException',
+            'class' => FinalException::class,
         ];
 
         /** @var FinalException $exception */
         $exception = WyriHaximus\throwable_decode($json);
-        self::assertInstanceOf('WyriHaximus\Tests\FinalException', $exception);
+        self::assertInstanceOf(FinalException::class, $exception);
         self::assertSame('whoops', $exception->getMessage());
     }
 
@@ -92,12 +91,12 @@ final class ThrowableDecodeTest extends TestCase
             'line' => 0,
             'trace' => [],
             'previous' => null,
-            'class' => 'WyriHaximus\Tests\FinalRequiredConstructorArgumentsException',
+            'class' => FinalRequiredConstructorArgumentsException::class,
         ];
 
         /** @var FinalRequiredConstructorArgumentsException $exception */
         $exception = WyriHaximus\throwable_decode($json);
-        self::assertInstanceOf('WyriHaximus\Tests\FinalRequiredConstructorArgumentsException', $exception);
+        self::assertInstanceOf(FinalRequiredConstructorArgumentsException::class, $exception);
         self::assertSame('whoops', $exception->getMessage());
     }
 }
