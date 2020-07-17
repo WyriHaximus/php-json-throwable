@@ -21,10 +21,6 @@ function throwable_json_encode(Throwable $throwable): string
  */
 function throwable_encode(Throwable $throwable): array
 {
-    if (!($throwable instanceof Exception) && !($throwable instanceof Throwable)) {
-        throw new NotAThrowableException($throwable);
-    }
-
     $json = [];
     $json['class'] = get_class($throwable);
     $json['message'] = $throwable->getMessage();
