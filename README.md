@@ -1,19 +1,18 @@
 # JSON encode and decode throwables and exceptions
 
-[![Linux Build Status](https://travis-ci.org/WyriHaximus/php-json-throwable.png)](https://travis-ci.org/WyriHaximus/php-json-throwable)
-[![Windows Build status](https://ci.appveyor.com/api/projects/status/1sfdh9g2pvbuw4pp?svg=true)](https://ci.appveyor.com/project/WyriHaximus/php-json-throwable)
-[![Latest Stable Version](https://poser.pugx.org/WyriHaximus/json-throwable/v/stable.png)](https://packagist.org/packages/WyriHaximus/json-throwable)
-[![Total Downloads](https://poser.pugx.org/WyriHaximus/json-throwable/downloads.png)](https://packagist.org/packages/WyriHaximus/json-throwable)
+![Continuous Integration](https://github.com/wyrihaximus/php-json-throwable/workflows/Continuous%20Integration/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/wyrihaximus/json-throwable/v/stable.png)](https://packagist.org/packages/wyrihaximus/json-throwable)
+[![Total Downloads](https://poser.pugx.org/wyrihaximus/json-throwable/downloads.png)](https://packagist.org/packages/wyrihaximus/json-throwable/stats)
 [![Code Coverage](https://scrutinizer-ci.com/g/WyriHaximus/php-json-throwable/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/WyriHaximus/php-json-throwable/?branch=master)
-[![License](https://poser.pugx.org/WyriHaximus/json-throwable/license.png)](https://packagist.org/packages/wyrihaximus/json-throwable)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/WyriHaximus/php-json-throwable/badge.svg)](https://travis-ci.org/WyriHaximus/php-json-throwable)
+[![Type Coverage](https://shepherd.dev/github/WyriHaximus/php-json-throwable/coverage.svg)](https://shepherd.dev/github/WyriHaximus/php-json-throwable)
+[![License](https://poser.pugx.org/wyrihaximus/json-throwable/license.png)](https://packagist.org/packages/wyrihaximus/json-throwable)
 
 ### Installation ###
 
 To install via [Composer](http://getcomposer.org/), use the command below, it will automatically detect the latest version and bind it with `~`.
 
 ```
-composer require wyrihaximus/json-throwable 
+composer require wyrihaximus/json-throwable
 ```
 
 
