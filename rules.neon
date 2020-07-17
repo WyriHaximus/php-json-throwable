@@ -1,0 +1,7 @@
+parameters:
+	ergebnis:
+		classesAllowedToBeExtended:
+			- WyriHaximus\TestUtilities\TestCase
+
+includes:
+	- ../phpstan-rules-wrapper/wrapper.neon
