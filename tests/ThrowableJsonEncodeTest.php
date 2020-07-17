@@ -1,17 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WyriHaximus\Tests;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus;
 
+use function get_class;
+use function Safe\json_encode;
+
 final class ThrowableJsonEncodeTest extends TestCase
 {
-    public function test()
+    public function test(): void
     {
-        $exception = new Exception('whoops');
-        $json = [
+        $exception     = new Exception('whoops');
+        $json          = [
             'class' => get_class($exception),
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
@@ -21,9 +26,10 @@ final class ThrowableJsonEncodeTest extends TestCase
         ];
         $json['trace'] = [];
         foreach ($exception->getTrace() as $item) {
-            $item['args'] = [];
+            $item['args']    = [];
             $json['trace'][] = $item;
         }
+
         $json = json_encode($json);
 
         $exception = WyriHaximus\throwable_json_encode($exception);
