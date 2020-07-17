@@ -1,4 +1,7 @@
 labelPRBasedOnFilePath:
+  "Documentation 📚":
+    - README.md
+    - CONTRIBUTING.md
   "Dependencies 📦":
     - Dockerfile*
     - composer.*
