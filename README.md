@@ -7,7 +7,7 @@
 [![Type Coverage](https://shepherd.dev/github/WyriHaximus/php-json-throwable/coverage.svg)](https://shepherd.dev/github/WyriHaximus/php-json-throwable)
 [![License](https://poser.pugx.org/wyrihaximus/json-throwable/license.png)](https://packagist.org/packages/wyrihaximus/json-throwable)
 
-### Installation ###
+### Installation
 
 To install via [Composer](http://getcomposer.org/), use the command below, it will automatically detect the latest version and bind it with `~`.
 
@@ -15,6 +15,21 @@ To install via [Composer](http://getcomposer.org/), use the command below, it wi
 composer require wyrihaximus/json-throwable
 ```
 
+### Usage
+
+This package comes with four functions:
+
+* `throwable_json_encode` - Encodes any Throwable to a JSON string
+* `throwable_encode` - Encodes any Throwable to an array
+* `throwable_json_decode` - Decodes a JSON string in the format from `throwable_json_encode` into the original `Exception` or `Error`
+* `throwable_decode` - Decodes an array in the format from `throwable_encode` into the original `Exception` or `Error`
+
+#### Heads up
+
+There are a few gotchas when using this package.
+
+* Both the encoding functions drop the arguments from the trace.
+* Any previous `Throwable`s will also be encoded and decoded but always with `throwable_json_*`.
 
 ## Contributing ##
 
@@ -22,7 +37,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## License ##
 
-Copyright 2018 [Cees-Jan Kiewiet](http://wyrihaximus.net/)
+Copyright 2020 [Cees-Jan Kiewiet](http://wyrihaximus.net/)
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
