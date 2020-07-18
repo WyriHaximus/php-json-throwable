@@ -69,6 +69,16 @@ final class ExposeTraceException extends Exception
 }
 ```
 
+## Encode/Decode array type hint
+
+When you're calling `throwable_encode` or `throwable_decode` the array (return) type hint has the following signature:
+
+```php
+array{class: class-string<Throwable>, code: mixed, file: string, line: int, message: string, previous: string|null, originalTrace: array<int, mixed>}
+```
+
+This signature isn't enforce by PHP but tools like [`PHPStan`](https://phpstan.org/) or [`Psalm`](https://psalm.dev/) will use it  to assert type safety from a static analysis pont of view.
+
 ## Contributing ##
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
