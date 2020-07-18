@@ -22,6 +22,7 @@ final class ThrowableJsonDecodeTest extends TestCase
             'line' => 0,
             'originalTrace' => [['key' => 'value']],
             'previous' => null,
+            'additionalProperties' => [],
         ]);
 
         $exception = WyriHaximus\throwable_json_decode($json);
