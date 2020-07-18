@@ -11,7 +11,6 @@ use ReflectionException;
 use ReflectionProperty;
 use Throwable;
 
-use function array_pop;
 use function assert;
 use function get_class;
 use function Safe\json_decode;
@@ -23,7 +22,7 @@ function throwable_json_encode(Throwable $throwable): string
 }
 
 /**
- * @return array{class: class-string<Throwable>, code: mixed, file: string, line: int, message: string, previous: string|null, trace: array<int, mixed>}
+ * @return array{class: class-string<Throwable>, code: mixed, file: string, line: int, message: string, previous: string|null, originalTrace: array<int, mixed>}
  */
 function throwable_encode(Throwable $throwable): array
 {
@@ -36,10 +35,10 @@ function throwable_encode(Throwable $throwable): array
     /** @psalm-suppress PossiblyNullArgument */
     $json['previous'] = $throwable->getPrevious() instanceof Throwable ? throwable_json_encode($throwable->getPrevious()) : null;
 
-    $json['trace'] = [];
+    $json['originalTrace'] = [];
     foreach ($throwable->getTrace() as $item) {
-        $item['args']    = [];
-        $json['trace'][] = $item;
+        $item['args']            = [];
+        $json['originalTrace'][] = $item;
     }
 
     return $json;
@@ -51,7 +50,7 @@ function throwable_json_decode(string $json): Throwable
 }
 
 /**
- * @param array{class: class-string<Throwable>, message: string, code: mixed, file: string, line: int, previous: string|null, trace: array<int, mixed>} $json
+ * @param array{class: class-string<Throwable>, message: string, code: mixed, file: string, line: int, previous: string|null, originalTrace: array<int, mixed>} $json
  *
  * @throws ExceptionInterface
  * @throws ReflectionException
@@ -65,12 +64,10 @@ function throwable_decode(array $json): Throwable
         'file' => 'string',
         'line' => 'integer',
         'previous' => ['string', 'NULL'],
-        'trace' => 'array',
+        'originalTrace' => 'array',
     ];
 
     validate_array($json, $properties, NotAnEncodedThrowableException::class);
-
-    array_pop($properties);
 
     if ($json['previous'] !== null) {
         $json['previous'] = throwable_json_decode($json['previous']);
