@@ -69,12 +69,45 @@ final class ExposeTraceException extends Exception
 }
 ```
 
+## Including additional properties from throwables
+
+If your throwables include any properties you'd want to take along when it gets encoded, implement the
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace WyriHaximus\Tests;
+
+use Exception;
+use WyriHaximus\ExposeTraceTrait;
+
+final class AdditionalPropertiesException extends Exception
+{
+    use ExposeTraceTrait;
+
+    private int $time;
+
+    public function __construct(int $time)
+    {
+        parent::__construct('Additional properties exception raised');
+        $this->time = $time;
+    }
+
+    public function time(): int
+    {
+        return $this->time;
+    }
+}
+```
+
 ## Encode/Decode array type hint
 
 When you're calling `throwable_encode` or `throwable_decode` the array (return) type hint has the following signature:
 
 ```php
-array{class: class-string<Throwable>, code: mixed, file: string, line: int, message: string, previous: string|null, originalTrace: array<int, mixed>}
+array{class: class-string<Throwable>, message: string, code: mixed, file: string, line: int, previous: string|null, originalTrace: array<int, mixed>, additionalProperties: array<string, string>}
 ```
 
 This signature isn't enforce by PHP but tools like [`PHPStan`](https://phpstan.org/) or [`Psalm`](https://psalm.dev/) will use it  to assert type safety from a static analysis pont of view.

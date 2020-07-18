@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 use WyriHaximus;
 
 use function assert;
+use function serialize;
+use function time;
 
 final class ThrowableDecodeTest extends TestCase
 {
@@ -21,6 +23,7 @@ final class ThrowableDecodeTest extends TestCase
             'line' => 0,
             'originalTrace' => [['key' => 'value']],
             'previous' => null,
+            'additionalProperties' => [],
         ];
 
         $exception = WyriHaximus\throwable_decode($json);
@@ -42,6 +45,7 @@ final class ThrowableDecodeTest extends TestCase
             'line' => 0,
             'originalTrace' => [],
             'previous' => null,
+            'additionalProperties' => [],
         ];
 
         $exception = WyriHaximus\throwable_decode($json);
@@ -59,6 +63,7 @@ final class ThrowableDecodeTest extends TestCase
             'line' => 0,
             'originalTrace' => [],
             'previous' => null,
+            'additionalProperties' => [],
         ];
 
         $exception = WyriHaximus\throwable_decode($json);
@@ -76,10 +81,33 @@ final class ThrowableDecodeTest extends TestCase
             'line' => 0,
             'originalTrace' => [],
             'previous' => null,
+            'additionalProperties' => [],
         ];
 
         $exception = WyriHaximus\throwable_decode($json);
         self::assertInstanceOf(FinalRequiredConstructorArgumentsException::class, $exception);
         self::assertSame('whoops', $exception->getMessage());
+    }
+
+    /**
+     * @test
+     */
+    public function additionalProperties(): void
+    {
+        $time = time();
+        $json = [
+            'class' => AdditionalPropertiesException::class,
+            'message' => 'whoops',
+            'code' => 13,
+            'file' => __FILE__,
+            'line' => 0,
+            'originalTrace' => [],
+            'previous' => null,
+            'additionalProperties' => ['time' => serialize($time)],
+        ];
+
+        $exception = WyriHaximus\throwable_decode($json);
+        self::assertInstanceOf(AdditionalPropertiesException::class, $exception);
+        self::assertSame($time, $exception->time());
     }
 }

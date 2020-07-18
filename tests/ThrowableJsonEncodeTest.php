@@ -15,16 +15,17 @@ final class ThrowableJsonEncodeTest extends TestCase
 {
     public function test(): void
     {
-        $exception             = new Exception('whoops');
-        $json                  = [
+        $exception = new Exception('whoops');
+        $json      = [
             'class' => get_class($exception),
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
             'previous' => $exception->getPrevious(),
+            'originalTrace' => [],
+            'additionalProperties' => [],
         ];
-        $json['originalTrace'] = [];
         foreach ($exception->getTrace() as $item) {
             $item['args']            = [];
             $json['originalTrace'][] = $item;
