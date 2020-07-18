@@ -29,7 +29,45 @@ This package comes with four functions:
 There are a few gotchas when using this package.
 
 * Both the encoding functions drop the arguments from the trace.
+* Because we can't overwrite the trace, a new one will be placed in the `originalTrace` property when available.
 * Any previous `Throwable`s will also be encoded and decoded but always with `throwable_json_*`.
+
+Example of gaining access to the original trace, it isn't optimal, but it works:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+final class ExposeTraceException extends Exception
+{
+    /** @var array<array<string, mixed>> */
+    private array $originalTrace = [];
+
+    /**
+     * @return array<array<string, mixed>>
+     */
+    public function getOriginalTrace(): array
+    {
+        return $this->originalTrace;
+    }
+}
+```
+
+Alternatively you can use the trait supplied by this package:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use WyriHaximus\ExposeTraceTrait;
+
+final class ExposeTraceException extends Exception
+{
+    use ExposeTraceTrait;
+}
+```
 
 ## Contributing ##
 
