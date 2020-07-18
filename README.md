@@ -71,19 +71,17 @@ final class ExposeTraceException extends Exception
 
 ## Including additional properties from throwables
 
-If your throwables include any properties you'd want to take along when it gets encoded, implement the
+If your throwables include any properties you'd want to take along when it gets encoded, implement the `AdditionalPropertiesInterface` returning a list of all properties you'd want to haved included in the encoding:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace WyriHaximus\Tests;
-
-use Exception;
+use WyriHaximus\AdditionalPropertiesInterface;
 use WyriHaximus\ExposeTraceTrait;
 
-final class AdditionalPropertiesException extends Exception
+final class AdditionalPropertiesException extends Exception implements AdditionalPropertiesInterface
 {
     use ExposeTraceTrait;
 
@@ -99,7 +97,16 @@ final class AdditionalPropertiesException extends Exception
     {
         return $this->time;
     }
+
+    /**
+     * @return array<string>
+     */
+    public function additionalProperties(): array
+    {
+        return ['time'];
+    }
 }
+
 ```
 
 ## Encode/Decode array type hint
