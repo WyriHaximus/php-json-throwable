@@ -15,7 +15,7 @@
         "wyrihaximus/json-utilities": "^1.2"
     },
     "require-dev": {
-        "wyrihaximus/test-utilities": "^2.5"
+        "wyrihaximus/test-utilities": "^2.5 || ^3.0"
     },
     "config": {
         "platform": {
