@@ -9,13 +9,13 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^8 || ^7.4",
         "doctrine/instantiator": "^1.0.5",
         "thecodingmachine/safe": "^1.1",
         "wyrihaximus/json-utilities": "^1.2"
     },
     "require-dev": {
-        "wyrihaximus/test-utilities": "^2.5"
+        "wyrihaximus/test-utilities": "^3.3.1"
     },
     "config": {
         "platform": {

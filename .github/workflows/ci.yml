@@ -12,12 +12,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [7.4]
+        php: [7.4, 8.0-rc]
         composer: [lowest, current, highest]
     needs: lint
     runs-on: ubuntu-latest
     container:
-      image: wyrihaximusnet/php:${{ matrix.php }}-zts-alpine3.11-dev-root
+      image: wyrihaximusnet/php:${{ matrix.php }}-nts-alpine3.12-dev-root
     steps:
       - uses: actions/checkout@v1
       - name: Cache composer packages
@@ -38,13 +38,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [7.4]
+        php: [7.4, 8.0-rc]
         composer: [lowest, current, highest]
-        qa: [lint, cs, stan, psalm, unit-ci, infection, composer-require-checker, composer-unused, backward-compatibility-check]
+        qa: [lint, cs, stan, psalm, unit, infection, composer-require-checker, composer-unused, backward-compatibility-check]
     needs: composer-install
     runs-on: ubuntu-latest
     container:
-      image: wyrihaximusnet/php:${{ matrix.php }}-zts-alpine3.11-dev-root
+      image: wyrihaximusnet/php:${{ matrix.php }}-nts-alpine3.12-dev-root
     steps:
       - uses: actions/checkout@v1
       - name: Cache composer packages
