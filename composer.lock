@@ -8321,20 +8321,19 @@
         },
         {
             "name": "wyrihaximus/test-utilities",
-            "version": "3.7.5",
+            "version": "3.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WyriHaximus/php-test-utilities.git",
-                "reference": "c1d47bd1ffcd6ff6a7cfb310c0ffc39a1c30d763"
+                "reference": "4a900a8f44207c3f0f6a4819676aca7612f4821f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WyriHaximus/php-test-utilities/zipball/c1d47bd1ffcd6ff6a7cfb310c0ffc39a1c30d763",
-                "reference": "c1d47bd1ffcd6ff6a7cfb310c0ffc39a1c30d763",
+                "url": "https://api.github.com/repos/WyriHaximus/php-test-utilities/zipball/4a900a8f44207c3f0f6a4819676aca7612f4821f",
+                "reference": "4a900a8f44207c3f0f6a4819676aca7612f4821f",
                 "shasum": ""
             },
             "require": {
-                "composer/composer": "^1.10.23",
                 "dereuromark/composer-prefer-lowest": "^0.1.10",
                 "ergebnis/composer-normalize": "^2.15.0",
                 "icanhazstring/composer-unused": "^0.7.5",
@@ -8367,7 +8366,6 @@
             "extra": {
                 "unused": [
                     "php",
-                    "composer/composer",
                     "dereuromark/composer-prefer-lowest",
                     "friendsofphp/php-cs-fixer",
                     "icanhazstring/composer-unused",
@@ -8407,7 +8405,7 @@
             "description": "🛠️ Test utilities for api-clients packages",
             "support": {
                 "issues": "https://github.com/WyriHaximus/php-test-utilities/issues",
-                "source": "https://github.com/WyriHaximus/php-test-utilities/tree/3.7.5"
+                "source": "https://github.com/WyriHaximus/php-test-utilities/tree/3.7.6"
             },
             "funding": [
                 {
@@ -8415,7 +8413,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-11T09:42:15+00:00"
+            "time": "2021-11-15T22:30:45+00:00"
         }
     ],
     "aliases": [],
