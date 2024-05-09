@@ -1,20 +1,17 @@
 name: Continuous Integration
 on:
+  push:
+    branches:
+      - 'main'
+      - 'master'
+      - 'refs/heads/v[0-9]+.[0-9]+.[0-9]+'
   pull_request:
+## This workflow needs the `pull-request` permissions to work for the package diffing
+## Refs: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#permissions
+permissions:
+  pull-requests: write
+  contents: read
 jobs:
-  qa:
-    strategy:
-      fail-fast: false
-      matrix:
-        php: [7.4, "8.0", 8.1, 8.2, 8.3]
-        composer: [lowest, current, highest]
-        qa: [lint, unit, infection, composer-require-checker, composer-unused, backward-compatibility-check]
-    runs-on: ubuntu-latest
-    container:
-      image: wyrihaximusnet/php:${{ matrix.php }}-nts-alpine-dev-root
-    steps:
-      - uses: actions/checkout@v4
-      - run: git config --global --add safe.directory $GITHUB_WORKSPACE # Do this ourself because `actions/checkout@v4 doesn't succeed in doing this
-      - name: Installation Dependencies
-        run: composer install --ansi --no-progress --no-interaction --prefer-dist -o
-      - run: make ${{ matrix.qa }}
+  ci:
+    name: Continuous Integration
+    uses: WyriHaximus/github-workflows/.github/workflows/package.yaml@main
