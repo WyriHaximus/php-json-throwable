@@ -1,0 +1,8 @@
+parameters:
+	ergebnis:
+		noExtends:
+			classesAllowedToBeExtended:
+				- Exception
+
+includes:
+	- ../../vendor/wyrihaximus/test-utilities/rules.neon

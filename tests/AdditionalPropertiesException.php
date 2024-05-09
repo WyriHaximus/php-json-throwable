@@ -12,12 +12,9 @@ final class AdditionalPropertiesException extends Exception implements Additiona
 {
     use ExposeTraceTrait;
 
-    private int $time;
-
-    public function __construct(int $time)
+    public function __construct(private int $time)
     {
         parent::__construct('Additional properties exception raised');
-        $this->time = $time;
     }
 
     public function time(): int
@@ -25,9 +22,7 @@ final class AdditionalPropertiesException extends Exception implements Additiona
         return $this->time;
     }
 
-    /**
-     * @return array<string>
-     */
+    /** @return array<string> */
     public function additionalProperties(): array
     {
         return ['time'];

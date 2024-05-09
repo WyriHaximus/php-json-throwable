@@ -6,8 +6,6 @@ namespace WyriHaximus;
 
 interface AdditionalPropertiesInterface
 {
-    /**
-     * @return array<string>
-     */
+    /** @return array<string> */
     public function additionalProperties(): array;
 }

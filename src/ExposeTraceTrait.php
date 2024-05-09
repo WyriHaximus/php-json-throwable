@@ -9,9 +9,7 @@ trait ExposeTraceTrait
     /** @var array<array<string, mixed>> */
     private array $originalTrace = [];
 
-    /**
-     * @return array<array<string, mixed>>
-     */
+    /** @return array<array<string, mixed>> */
     public function getOriginalTrace(): array
     {
         return $this->originalTrace;

@@ -8,7 +8,6 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus;
 
-use function get_class;
 use function Safe\json_encode;
 
 final class ThrowableJsonEncodeTest extends TestCase
@@ -17,7 +16,7 @@ final class ThrowableJsonEncodeTest extends TestCase
     {
         $exception = new Exception('whoops');
         $json      = [
-            'class' => get_class($exception),
+            'class' => $exception::class,
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
             'file' => $exception->getFile(),
