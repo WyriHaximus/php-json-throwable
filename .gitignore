@@ -1,2 +1,6 @@
-examples/credentials.php
+var/*
+!var/.gitkeep
+src/Generated/*
+!src/Generated/.gitkeep
 vendor/
+etc/qa/.phpunit.result.cache

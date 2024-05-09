@@ -8,7 +8,6 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus;
 
-use function get_class;
 use function serialize;
 use function time;
 
@@ -18,7 +17,7 @@ final class ThrowableEncodeTest extends TestCase
     {
         $exception = new Exception('whoops');
         $json      = [
-            'class' => get_class($exception),
+            'class' => $exception::class,
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
             'file' => $exception->getFile(),
@@ -36,15 +35,13 @@ final class ThrowableEncodeTest extends TestCase
         self::assertSame($json, $exception);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function additionalProperties(): void
     {
         $time      = time();
         $exception = new AdditionalPropertiesException($time);
         $json      = [
-            'class' => get_class($exception),
+            'class' => $exception::class,
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
             'file' => $exception->getFile(),

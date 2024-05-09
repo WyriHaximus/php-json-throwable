@@ -9,5 +9,8 @@ use Exception;
 // phpcs:disable
 final class MissingAttributes extends Exception
 {
+    /**
+     * @phpstan-ignore-next-line
+     */
     public $message;
 }

@@ -11,8 +11,6 @@ use ReflectionException;
 use ReflectionProperty;
 use Throwable;
 
-use function assert;
-use function get_class;
 use function Safe\json_decode;
 use function Safe\json_encode;
 use function serialize;
@@ -23,13 +21,11 @@ function throwable_json_encode(Throwable $throwable): string
     return json_encode(throwable_encode($throwable));
 }
 
-/**
- * @return array{class: class-string<Throwable>, message: string, code: mixed, file: string, line: int, previous: string|null, originalTrace: array<int, mixed>, additionalProperties: array<string, string>}
- */
+/** @return array{class: class-string<Throwable>, message: string, code: mixed, file: string, line: int, previous: string|null, originalTrace: array<int, mixed>, additionalProperties: array<string, string>} */
 function throwable_encode(Throwable $throwable): array
 {
     $json            = [];
-    $json['class']   = get_class($throwable);
+    $json['class']   = $throwable::class;
     $json['message'] = $throwable->getMessage();
     $json['code']    = $throwable->getCode();
     $json['file']    = $throwable->getFile();
@@ -58,7 +54,10 @@ function throwable_encode(Throwable $throwable): array
 
 function throwable_json_decode(string $json): Throwable
 {
-    return throwable_decode(json_decode($json, true));
+    /** @var array{class: class-string<Throwable>, message: string, code: mixed, file: string, line: int, previous: string|null, originalTrace: array<int, mixed>, additionalProperties: array<string, string>} $jsonArray */
+    $jsonArray = json_decode($json, true);
+
+    return throwable_decode($jsonArray);
 }
 
 /**
@@ -90,8 +89,7 @@ function throwable_decode(array $json): Throwable
     }
 
     $throwable = (new Instantiator())->instantiate($json['class']);
-    assert($throwable instanceof Throwable);
-    $class = new ReflectionClass($json['class']);
+    $class     = new ReflectionClass($json['class']);
     foreach ($properties as $key => $type) {
         if (! $class->hasProperty($key)) {
             continue;

@@ -89,9 +89,7 @@ final class ThrowableDecodeTest extends TestCase
         self::assertSame('whoops', $exception->getMessage());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function additionalProperties(): void
     {
         $time = time();
