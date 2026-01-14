@@ -15,7 +15,7 @@
         "wyrihaximus/json-utilities": "^1.3.1"
     },
     "require-dev": {
-        "wyrihaximus/test-utilities": "^6.0.7"
+        "wyrihaximus/test-utilities": "^6.0.10"
     },
     "autoload": {
         "psr-4": {
