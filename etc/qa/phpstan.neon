@@ -1,8 +1,10 @@
 parameters:
+	level: max
+	paths:
+		- ../../etc
+		- ../../src
+		- ../../tests
 	ergebnis:
 		noExtends:
 			classesAllowedToBeExtended:
 				- Exception
-
-includes:
-	- ../../vendor/wyrihaximus/test-utilities/rules.neon

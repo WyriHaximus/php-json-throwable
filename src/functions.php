@@ -9,16 +9,27 @@ use Doctrine\Instantiator\Instantiator;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
+use RuntimeException;
 use Throwable;
 
-use function Safe\json_decode;
-use function Safe\json_encode;
+use function array_key_exists;
+use function array_keys;
+use function is_string;
+use function json_decode;
+use function json_encode;
+use function json_last_error_msg;
 use function serialize;
 use function unserialize;
 
 function throwable_json_encode(Throwable $throwable): string
 {
-    return json_encode(throwable_encode($throwable));
+    $string = json_encode(throwable_encode($throwable));
+
+    if (! is_string($string)) {
+        throw new RuntimeException(json_last_error_msg());
+    }
+
+    return $string;
 }
 
 /** @return array{class: class-string<Throwable>, message: string, code: mixed, file: string, line: int, previous: string|null, originalTrace: array<int, mixed>, additionalProperties: array<string, string>} */
@@ -41,10 +52,8 @@ function throwable_encode(Throwable $throwable): array
 
     $json['additionalProperties'] = [];
     if ($throwable instanceof AdditionalPropertiesInterface) {
-        $class = new ReflectionClass($json['class']);
         foreach ($throwable->additionalProperties() as $key) {
-            $property = new ReflectionProperty($json['class'], $key);
-            $property->setAccessible(true);
+            $property                           = new ReflectionProperty($json['class'], $key);
             $json['additionalProperties'][$key] = serialize($property->getValue($throwable));
         }
     }
@@ -88,22 +97,24 @@ function throwable_decode(array $json): Throwable
         $json['previous'] = throwable_json_decode($json['previous']);
     }
 
-    $throwable = (new Instantiator())->instantiate($json['class']);
+    $throwable = new Instantiator()->instantiate($json['class']);
     $class     = new ReflectionClass($json['class']);
-    foreach ($properties as $key => $type) {
+    foreach (array_keys($properties) as $key) {
         if (! $class->hasProperty($key)) {
             continue;
         }
 
         $property = new ReflectionProperty($json['class'], $key);
-        $property->setAccessible(true);
+
+        if (! array_key_exists($key, $json)) {
+            continue;
+        }
 
         /**
          * @psalm-suppress PossiblyInvalidArrayOffset
          * @psalm-suppress InvalidArrayOffset
          */
         $property->setValue($throwable, $json[$key]);
-        $property->setAccessible(false);
     }
 
     foreach ($additionalProperties as $key => $contents) {
@@ -112,9 +123,7 @@ function throwable_decode(array $json): Throwable
         }
 
         $property = new ReflectionProperty($json['class'], $key);
-        $property->setAccessible(true);
         $property->setValue($throwable, unserialize($additionalProperties[$key]));
-        $property->setAccessible(false);
     }
 
     return $throwable;

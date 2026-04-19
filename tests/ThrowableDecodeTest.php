@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus;
 
@@ -13,6 +14,7 @@ use function time;
 
 final class ThrowableDecodeTest extends TestCase
 {
+    #[Test]
     public function test(): void
     {
         $json = [
@@ -35,7 +37,8 @@ final class ThrowableDecodeTest extends TestCase
         self::assertSame('whoops', $exception->getMessage());
     }
 
-    public function testWithMissingAttributes(): void
+    #[Test]
+    public function withMissingAttributes(): void
     {
         $json = [
             'class' => MissingAttributes::class,
@@ -53,7 +56,8 @@ final class ThrowableDecodeTest extends TestCase
         self::assertSame('whoops', $exception->message);
     }
 
-    public function testRequiredConstructorArguments(): void
+    #[Test]
+    public function requiredConstructorArguments(): void
     {
         $json = [
             'class' => RequiredConstructorArgumentsException::class,
@@ -71,7 +75,8 @@ final class ThrowableDecodeTest extends TestCase
         self::assertSame('whoops', $exception->getMessage());
     }
 
-    public function testFinalRequiredConstructorArguments(): void
+    #[Test]
+    public function finalRequiredConstructorArguments(): void
     {
         $json = [
             'class' => FinalRequiredConstructorArgumentsException::class,
@@ -89,7 +94,7 @@ final class ThrowableDecodeTest extends TestCase
         self::assertSame('whoops', $exception->getMessage());
     }
 
-    /** @test */
+    #[Test]
     public function additionalProperties(): void
     {
         $time = time();

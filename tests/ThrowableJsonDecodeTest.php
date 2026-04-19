@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus;
 
@@ -12,6 +13,7 @@ use function Safe\json_encode;
 
 final class ThrowableJsonDecodeTest extends TestCase
 {
+    #[Test]
     public function test(): void
     {
         $json = json_encode([

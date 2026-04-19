@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus\NotAnEncodedThrowableException;
 
 final class NotAnEncodedThrowableExceptionTest extends TestCase
 {
+    #[Test]
     public function test(): void
     {
         $json      = ['string' => 'array', 'null' => null, 'integer' => 123];

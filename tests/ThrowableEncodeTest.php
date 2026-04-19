@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace WyriHaximus\Tests;
 
 use Exception;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus;
 
@@ -13,7 +14,8 @@ use function time;
 
 final class ThrowableEncodeTest extends TestCase
 {
-    public function test(): void
+    #[Test]
+    public function bare(): void
     {
         $exception = new Exception('whoops');
         $json      = [
@@ -31,11 +33,11 @@ final class ThrowableEncodeTest extends TestCase
             $json['originalTrace'][] = $item;
         }
 
-        $exception = WyriHaximus\throwable_encode($exception);
-        self::assertSame($json, $exception);
+        $exceptionJson = WyriHaximus\throwable_encode($exception);
+        self::assertSame($json, $exceptionJson);
     }
 
-    /** @test */
+    #[Test]
     public function additionalProperties(): void
     {
         $time      = time();
@@ -55,7 +57,7 @@ final class ThrowableEncodeTest extends TestCase
             $json['originalTrace'][] = $item;
         }
 
-        $exception = WyriHaximus\throwable_encode($exception);
-        self::assertSame($json, $exception);
+        $exceptionJson = WyriHaximus\throwable_encode($exception);
+        self::assertSame($json, $exceptionJson);
     }
 }

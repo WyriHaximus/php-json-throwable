@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace WyriHaximus\Tests;
 
 use Exception;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus;
 
-use function Safe\json_encode;
+use function json_encode;
+use function json_last_error_msg;
 
 final class ThrowableJsonEncodeTest extends TestCase
 {
-    public function test(): void
+    #[Test]
+    public function bare(): void
     {
         $exception = new Exception('whoops');
-        $json      = [
+        $array     = [
             'class' => $exception::class,
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
@@ -26,13 +29,14 @@ final class ThrowableJsonEncodeTest extends TestCase
             'additionalProperties' => [],
         ];
         foreach ($exception->getTrace() as $item) {
-            $item['args']            = [];
-            $json['originalTrace'][] = $item;
+            $item['args']             = [];
+            $array['originalTrace'][] = $item;
         }
 
-        $json = json_encode($json);
+        $json = json_encode($array);
+        self::assertIsString($json, json_last_error_msg());
 
-        $exception = WyriHaximus\throwable_json_encode($exception);
-        self::assertSame($json, $exception);
+        $exceptionJson = WyriHaximus\throwable_json_encode($exception);
+        self::assertJsonStringEqualsJsonString($json, $exceptionJson);
     }
 }
