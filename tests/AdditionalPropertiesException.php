@@ -22,7 +22,7 @@ final class AdditionalPropertiesException extends Exception implements Additiona
         return $this->time;
     }
 
-    /** @return array<string> */
+    /** @return list<string> */
     public function additionalProperties(): array
     {
         return ['time'];

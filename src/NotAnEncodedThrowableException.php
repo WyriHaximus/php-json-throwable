@@ -6,10 +6,11 @@ namespace WyriHaximus;
 
 use Exception;
 
+/** @api */
 final class NotAnEncodedThrowableException extends Exception
 {
     /** @param array<string, mixed> $json */
-    public function __construct(private array $json, private string $field)
+    public function __construct(private readonly array $json, private readonly string $field)
     {
         parent::__construct('Given array is not an encoded Throwable, at least one field is missing');
     }
