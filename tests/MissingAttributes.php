@@ -10,7 +10,6 @@ use Exception;
 final class MissingAttributes extends Exception
 {
     /**
-     * @phpstan-ignore-next-line
      */
     public $message;
 }

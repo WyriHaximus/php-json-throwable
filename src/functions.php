@@ -35,13 +35,12 @@ function throwable_json_encode(Throwable $throwable): string
 /** @return array{class: class-string<Throwable>, message: string, code: mixed, file: string, line: int, previous: string|null, originalTrace: array<int, mixed>, additionalProperties: array<string, string>} */
 function throwable_encode(Throwable $throwable): array
 {
-    $json            = [];
-    $json['class']   = $throwable::class;
-    $json['message'] = $throwable->getMessage();
-    $json['code']    = $throwable->getCode();
-    $json['file']    = $throwable->getFile();
-    $json['line']    = $throwable->getLine();
-    /** @psalm-suppress PossiblyNullArgument */
+    $json             = [];
+    $json['class']    = $throwable::class;
+    $json['message']  = $throwable->getMessage();
+    $json['code']     = $throwable->getCode();
+    $json['file']     = $throwable->getFile();
+    $json['line']     = $throwable->getLine();
     $json['previous'] = $throwable->getPrevious() instanceof Throwable ? throwable_json_encode($throwable->getPrevious()) : null;
 
     $json['originalTrace'] = [];
@@ -110,10 +109,6 @@ function throwable_decode(array $json): Throwable
             continue;
         }
 
-        /**
-         * @psalm-suppress PossiblyInvalidArrayOffset
-         * @psalm-suppress InvalidArrayOffset
-         */
         $property->setValue($throwable, $json[$key]);
     }
 
