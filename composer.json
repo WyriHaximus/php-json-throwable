@@ -10,11 +10,12 @@
   ],
   "require": {
     "php": "^8.4",
+    "ext-json": "^8.4",
     "doctrine/instantiator": "^2.1.0",
     "wyrihaximus/json-utilities": "^1.4.0"
   },
   "require-dev": {
-    "wyrihaximus/makefiles": "^0.7.16",
+    "wyrihaximus/makefiles": "^0.10.6",
     "wyrihaximus/test-utilities": "^12.2.0"
   },
   "autoload": {

@@ -4,6 +4,9 @@ parameters:
 		- ../../etc
 		- ../../src
 		- ../../tests
+	excludePaths:
+		- ../../tests/FinalRequiredConstructorArgumentsException.php
+		- ../../tests/RequiredConstructorArgumentsException.php
 	ergebnis:
 		noExtends:
 			classesAllowedToBeExtended:
