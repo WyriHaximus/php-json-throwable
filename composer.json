@@ -15,7 +15,7 @@
     "wyrihaximus/json-utilities": "^1.4.0"
   },
   "require-dev": {
-    "wyrihaximus/makefiles": "^0.10.6",
+    "wyrihaximus/makefiles": "^0.11.1",
     "wyrihaximus/test-utilities": "^13.1.0"
   },
   "autoload": {
