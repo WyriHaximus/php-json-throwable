@@ -8,8 +8,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use WyriHaximus;
 
-use function assert;
-use function Safe\json_encode;
+use function json_encode;
 
 final class ThrowableJsonDecodeTest extends TestCase
 {
@@ -26,9 +25,10 @@ final class ThrowableJsonDecodeTest extends TestCase
             'previous' => null,
             'additionalProperties' => [],
         ]);
+        self::assertIsString($json);
 
         $exception = WyriHaximus\throwable_json_decode($json);
-        assert($exception instanceof ExposeTraceException);
+        self::assertInstanceOf(ExposeTraceException::class, $exception);
         self::assertSame(13, $exception->getCode());
         self::assertSame(__FILE__, $exception->getFile());
         self::assertSame(0, $exception->getLine());
