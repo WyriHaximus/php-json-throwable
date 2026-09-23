@@ -14,4 +14,4 @@ permissions:
 jobs:
   ci:
     name: Continuous Integration
-    uses: WyriHaximus/github-workflows/.github/workflows/package.yaml@5343944be2a6ef963186b5f413121fcf36980b33 # v1.0.0
+    uses: WyriHaximus/github-workflows/.github/workflows/package.yaml@62425f292ed39e245af475d0d99687e008225d60 # v1.0.4
