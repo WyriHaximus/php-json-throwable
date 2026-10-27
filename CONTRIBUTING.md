@@ -14,13 +14,21 @@ Work on the contribution and check if it passes all QA checks with:
 
     make
 
-If some of the PHPStan or other checks are to strict or intimidating that is fine, finish what you want to contribute and I'll help you with those, but please make the following command passes. It runs a subset of everything:
+If some of the PHPStan or other checks are too strict or intimidating that is fine, finish what you want to contribute and I'll help you with those, but please make the following command passes. It runs a subset of everything:
 
     make contrib
 
 You can list all the contrib commands with:
 
     make help-contrib
+
+## Documentation QA
+
+Changes to Markdown (README, CONTRIBUTING, AGENTS, and similar) must pass documentation QA. Both `make` and `make contrib` run `documentation-qa`, which checks structure ([markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)), links ([lychee](https://github.com/lycheeverse/lychee)), spelling ([cspell](https://cspell.org/)), and prose ([Vale](https://vale.sh/)).
+
+To run only the documentation checks:
+
+    make documentation-qa
 
 Push to your fork and [submit a pull request][pr].
 
